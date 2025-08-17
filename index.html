@@ -1,15 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Image Toolkit — Pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  <style>
-    :root { color-scheme: dark; } html, body { background:#000; color:#fff; } .bw-card { background: #0a0a0a; border: 1px solid #222; } .bw-input { background:#000; border:1px solid #333; color:#fff; } .bw-btn { background:#111; border:1px solid #444; color:#fff; transition: background-color 0.2s; } .bw-btn:hover { background:#1f1f1f; } .bw-btn:disabled { background: #111; color: #555; border-color: #333; cursor: not-allowed; } .dropzone { border: 2px dashed #444; } .dropzone.dragover { border-color: #fff; background:#0f0f0f; } .scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; } .scrollbar-thin::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; } .muted { color:#888; } .tag { border:1px solid #333; padding:2px 8px; border-radius:9999px; font-size:12px; } .side-tab { background: transparent; border: 1px solid #333; color: #888; text-align: left; } .side-tab.active { background: #111; color: #fff; border-color: #444; } .grid-auto { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); } .visually-hidden { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
-  </style>
+  <style>:root { color-scheme: dark; } html, body { background:#000; color:#fff; } .bw-card { background: #0a0a0a; border: 1px solid #222; } .bw-input { background:#000; border:1px solid #333; color:#fff; } .bw-btn { background:#111; border:1px solid #444; color:#fff; transition: background-color 0.2s; } .bw-btn:hover { background:#1f1f1f; } .bw-btn:disabled { background: #111; color: #555; border-color: #333; cursor: not-allowed; } .dropzone { border: 2px dashed #444; } .dropzone.dragover { border-color: #fff; background:#0f0f0f; } .scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; } .scrollbar-thin::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; } .muted { color:#888; } .tag { border:1px solid #333; padding:2px 8px; border-radius:9999px; font-size:12px; } .side-tab { background: transparent; border: 1px solid #333; color: #888; text-align: left; } .side-tab.active { background: #111; color: #fff; border-color: #444; } .grid-auto { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); } .visually-hidden { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }</style>
 </head>
 <body class="min-h-screen selection:bg-white selection:text-black">
   <div class="max-w-7xl mx-auto p-6">
@@ -17,15 +12,12 @@
       <div><h1 class="text-2xl font-semibold tracking-tight">Image Toolkit</h1><p class="text-sm muted">Your all-in-one tool for image processing and metadata.</p></div>
       <div class="flex items-center gap-2"><button id="settingsBtn" class="bw-btn rounded-xl px-3 py-2">Settings</button><button id="clearAllBtn" class="bw-btn rounded-xl px-3 py-2">Clear</button></div>
     </header>
-
     <div class="grid md:grid-cols-12 gap-6 items-start">
       <div class="md:col-span-5 flex flex-col gap-6">
           <section class="bw-card rounded-2xl p-4">
               <h2 class="text-sm muted mb-3">Choose a Tool</h2>
               <div class="flex flex-col gap-2" id="tabs">
                   <button data-tab="metadata" class="side-tab active rounded-lg px-4 py-3">Metadata Gen</button>
-                  <button data-tab="prompts" class="side-tab rounded-lg px-4 py-3">Prompt Generation</button>
-                  <button data-tab="backgrounds" class="side-tab rounded-lg px-4 py-3">Background Removal</button>
               </div>
           </section>
           <section class="bw-card rounded-2xl p-4">
@@ -33,14 +25,14 @@
               <div id="gallery" class="grid grid-auto gap-3 mt-4 max-h-[40vh] overflow-y-auto scrollbar-thin"></div>
           </section>
       </div>
-
       <div class="md:col-span-7">
         <section class="bw-card rounded-2xl p-4 min-h-[75vh] flex flex-col">
             <div id="metadataPanel">
                 <div class="flex items-center justify-between mb-4 border-b border-neutral-800 pb-3">
-                    <div class="grid grid-cols-2 gap-4 w-2/3">
-                        <div><label class="text-xs muted flex justify-between">Title Length: <span id="titleLengthLabel">10</span> words</label><input id="titleLength" type="range" min="5" max="20" value="10" class="w-full"></div>
+                    <div class="flex items-center gap-4 w-2/3">
+                        <div><label class="text-xs muted flex justify-between">Title Length: <span id="titleLengthLabel">10</span></label><input id="titleLength" type="range" min="5" max="20" value="10" class="w-full"></div>
                         <div><label class="text-xs muted flex justify-between">Keywords: <span id="keywordCountLabel">30</span></label><input id="keywordCount" type="range" min="1" max="50" value="30" class="w-full"></div>
+                        <div><label class="text-xs muted">Provider</label><select id="provider" class="bw-input w-full rounded-xl px-3 py-2 text-sm"><option value="gemini">Gemini</option><option value="groq">Groq (faster)</option></select></div>
                     </div><button id="generateMetadataBtn" class="bw-btn rounded-lg px-4 py-2">Generate Metadata</button>
                 </div>
                 <div class="max-h-[60vh] overflow-y-auto scrollbar-thin">
@@ -48,59 +40,41 @@
                     <p id="metadataPlaceholder" class="text-center text-sm muted p-8">Generated metadata will appear here.</p>
                 </div><button id="downloadCsvBtn" class="hidden bw-btn rounded-xl w-full text-center px-3 py-2 mt-4">Download CSV for Adobe Stock</button>
             </div>
-            
-            <div id="promptsPanel" class="hidden">
-                 <div class="flex items-center justify-between mb-3"><div class="flex items-center gap-2"><span class="tag" id="providerTag">Provider: Gemini</span></div><button id="generatePromptsBtn" class="bw-btn rounded-lg px-3 py-1 text-sm">Generate All</button></div>
-                 <div id="promptResultsContainer" class="space-y-4 max-h-[60vh] overflow-y-auto scrollbar-thin"><p id="promptPlaceholder" class="text-center text-sm muted p-8">Generated prompts will appear here.</p></div>
-                 <details class="mt-4"><summary class="cursor-pointer text-sm muted hover:text-white">Advanced controls</summary><div class="grid md:grid-cols-2 gap-3 mt-3"><div><label class="text-xs muted">Tone</label><select id="tone" class="bw-input w-full rounded-xl px-3 py-2 text-sm"><option value="neutral">neutral</option><option value="cinematic">cinematic</option></select></div><div><label class="text-xs muted">Detail</label><select id="detail" class="bw-input w-full rounded-xl px-3 py-2 text-sm"><option value="balanced">balanced</option><option value="high">high</option></select></div><div class="md:col-span-2"><label class="text-xs muted">Extra guidance</label><input id="extra" class="bw-input w-full rounded-xl px-3 py-2 text-sm"/></div></div></details>
-            </div>
-
-            <div id="backgroundsPanel" class="hidden">
-                <div class="flex items-center justify-between mb-3"><div class="flex items-center gap-2"><span class="tag">Provider: Clipdrop</span></div><button id="removeBgBtn" class="bw-btn rounded-lg px-3 py-1 text-sm">Remove All Backgrounds</button></div>
-                <div id="bgResultsContainer" class="space-y-4 max-h-[60vh] overflow-y-auto scrollbar-thin"><p id="bgPlaceholder" class="text-center text-sm muted p-8">Processed images will appear here.</p></div>
-                <button id="downloadZipBtn" class="hidden bw-btn rounded-xl w-full text-center px-3 py-2 mt-4">Download All as ZIP</button>
-            </div>
         </section>
       </div>
     </div>
   </div>
-
   <dialog id="settings" class="bw-card rounded-2xl p-0 w-full max-w-lg">
     <form method="dialog"><div class="p-4 border-b border-neutral-800 flex items-center justify-between"><h2 class="text-lg">Settings</h2><button class="bw-btn rounded-xl px-3 py-1">Close</button></div></form>
-    <div class="p-4"><div class="grid gap-4"><div><label class="text-xs muted">Gemini API keys (for Metadata & Prompts)</label><div id="geminiKeyList" class="space-y-2"></div><button id="addKeyBtn" class="bw-btn rounded-lg px-3 py-1 text-xs mt-2">Add API Key</button></div><div><label class="text-xs muted">Clipdrop API key (for Backgrounds)</label><input id="clipdropKey" type="password" class="bw-input w-full rounded-xl px-3 py-2" placeholder="Paste your Clipdrop API key"/></div></div><div class="mt-4 flex items-center justify-between"><div class="text-xs muted">Keys are stored securely on this device.</div><button id="saveSettings" class="bw-btn rounded-xl px-3 py-2">Save</button></div></div>
+    <div class="p-4"><div class="grid gap-4">
+        <div><label class="text-xs muted">Gemini API key (Required for Vision)</label><input id="geminiKey" type="password" class="bw-input w-full rounded-xl px-3 py-2" placeholder="Paste your Google AI Studio key"/></div>
+        <div><label class="text-xs muted">Groq API key (Optional, for faster generation)</label><input id="groqKey" type="password" class="bw-input w-full rounded-xl px-3 py-2" placeholder="Paste your Groq Console key"/></div>
+    </div><div class="mt-4 flex items-center justify-between"><div class="text-xs muted">Keys are stored securely on this device.</div><button id="saveSettings" class="bw-btn rounded-xl px-3 py-2">Save</button></div></div>
   </dialog>
-  
   <template id="thumbTpl"><div class="relative group rounded-xl overflow-hidden border border-neutral-800"><img class="w-full h-24 object-cover" /><div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"><button class="bw-btn rounded-full p-2" data-action="remove"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button></div></div></template>
   <template id="metadataRowTpl"><tr><td class="p-2 align-top"><div class="flex items-center gap-2"><img class="w-10 h-10 object-cover rounded-md"/><span class="truncate w-24"></span></div></td><td class="p-2 align-top text-white/80"></td><td class="p-2 align-top text-white/60 text-xs leading-5"></td><td class="p-2 align-top text-center"></td></tr></template>
-  <template id="apiKeyInputTpl"><div class="flex items-center gap-2"><input type="password" class="bw-input w-full rounded-xl px-3 py-2" placeholder="Paste your Google AI Studio key"><button data-action="remove-key" class="bw-btn rounded-lg px-2 py-1 text-xs">Remove</button></div></template>
-  <template id="promptCardTpl"><div class="bw-card rounded-xl p-3 flex items-start gap-3"><img class="w-16 h-16 object-cover rounded-md" /><div class="flex-grow"><textarea rows="3" class="bw-input w-full rounded-xl p-2 text-sm"></textarea><div class="flex items-center gap-2"><button class="bw-btn rounded-lg px-2 py-1 text-xs mt-2" data-action="copy">Copy</button><button class="bw-btn rounded-lg px-2 py-1 text-xs mt-2" data-action="regenerate">Regenerate</button></div></div></div></template>
-  <template id="bgCardTpl"><div class="bw-card rounded-xl p-3"><div class="grid grid-cols-2 gap-3"><div><p class="text-xs muted mb-1">Original</p><img class="w-full h-40 object-contain rounded-md bg-black" data-type="original" /></div><div class="relative"><p class="text-xs muted mb-1">Processed</p><img class="w-full h-40 object-contain rounded-md bg-black" data-type="processed" /><div class="absolute inset-0 flex items-center justify-center" data-type="loader"><p class="text-xs muted">Processing...</p></div></div></div><button class="hidden bw-btn w-full rounded-lg px-2 py-1.5 text-xs mt-3" data-action="download">Download</button></div></template>
-
   <script>
-    let state = { files: [], geminiKeys: [], clipdropKey: '', activeTab: 'metadata', keyIndex: 0 };
+    let state = { files: [], geminiKey: '', groqKey: '' };
     const $ = id => document.getElementById(id);
+    const ADOBE_CATEGORIES = `1. Animals, 2. Buildings and Architecture, 3. Business, 4. Drinks, 5. The Environment, 6. States of Mind, 7. Food, 8. Graphic Resources, 9. Hobbies and Leisure, 10. Industry, 11. Landscape, 12. Lifestyle, 13. People, 14. Plants and Flowers, 15. Culture and Religion, 16. Science, 17. Social Issues, 18. Sports, 19. Technology, 20. Transport, 21. Travel`;
     const elements = {
-        tabs: $('tabs'), gallery: $('gallery'), fileInput: $('fileInput'), dropzone: $('dropzone'),
-        metadataPanel: $('metadataPanel'), promptsPanel: $('promptsPanel'), backgroundsPanel: $('backgroundsPanel'),
-        generateMetadataBtn: $('generateMetadataBtn'), titleLength: $('titleLength'), keywordCount: $('keywordCount'), titleLengthLabel: $('titleLengthLabel'), keywordCountLabel: $('keywordCountLabel'),
+        gallery: $('gallery'), fileInput: $('fileInput'), dropzone: $('dropzone'),
+        generateMetadataBtn: $('generateMetadataBtn'), titleLength: $('titleLength'), keywordCount: $('keywordCount'),
+        titleLengthLabel: $('titleLengthLabel'), keywordCountLabel: $('keywordCountLabel'), provider: $('provider'),
         metadataTable: $('metadataTable').querySelector('tbody'), metadataPlaceholder: $('metadataPlaceholder'), downloadCsvBtn: $('downloadCsvBtn'),
-        generatePromptsBtn: $('generatePromptsBtn'), promptResultsContainer: $('promptResultsContainer'), promptPlaceholder: $('promptPlaceholder'),
-        removeBgBtn: $('removeBgBtn'), bgResultsContainer: $('bgResultsContainer'), bgPlaceholder: $('bgPlaceholder'), downloadZipBtn: $('downloadZipBtn'),
-        settingsBtn: $('settingsBtn'), clearAllBtn: $('clearAllBtn'), settingsDlg: $('settings'), geminiKeyList: $('geminiKeyList'), addKeyBtn: $('addKeyBtn'), clipdropKey: $('clipdropKey'), saveSettings: $('saveSettings')
+        settingsBtn: $('settingsBtn'), clearAllBtn: $('clearAllBtn'), settingsDlg: $('settings'), 
+        geminiKey: $('geminiKey'), groqKey: $('groqKey'), saveSettings: $('saveSettings')
     };
     
     const uid = () => Math.random().toString(36).slice(2, 9);
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-    const getNextApiKey = () => { if(state.geminiKeys.length === 0) return null; state.keyIndex = (state.keyIndex + 1) % state.geminiKeys.length; return state.geminiKeys[state.keyIndex]; };
     
     async function createPreviewForAnalysis(file, maxDim = 512) {
-        // ... (This function is unchanged)
         const isVideo = file.type.startsWith('video/');
         const objectUrl = URL.createObjectURL(file);
         return new Promise((resolve, reject) => {
             const el = isVideo ? document.createElement('video') : document.createElement('img');
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+            const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d');
             el.onloadeddata = el.onload = () => {
                 const w = isVideo ? el.videoWidth : el.width; const h = isVideo ? el.videoHeight : el.height;
                 const aspect = w / h;
@@ -109,7 +83,7 @@
                 ctx.drawImage(el, 0, 0, canvas.width, canvas.height);
                 URL.revokeObjectURL(objectUrl);
                 const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-                resolve({ previewDataUrl: dataUrl, analysisBase64: dataUrl.split(',')[1] });
+                resolve({ previewDataUrl: dataUrl, analysisBase64: dataUrl.split(',')[1], mime: 'image/jpeg' });
             };
             el.onerror = reject;
             if (isVideo) { el.muted = true; el.playsInline = true; el.src = objectUrl; el.play().catch(reject); } else { el.src = objectUrl; }
@@ -117,97 +91,48 @@
     }
 
     async function addFile(file) {
-        // ... (This function is unchanged)
         if (state.files.length >= 1000) return;
         const isVideo = file.type.startsWith('video/');
         if (file.size > (isVideo ? 100 : 50) * 1024 * 1024) { alert(`File ${file.name} is too large.`); return; }
         try {
             const previews = await createPreviewForAnalysis(file);
-            state.files.push({ id: uid(), file, fileName: file.name, ...previews, metadata: null, prompt: null, processedBlob: null });
+            state.files.push({ id: uid(), fileName: file.name, ...previews, metadata: null });
             renderGallery();
         } catch (error) { alert(`Could not process file: ${file.name}`); }
     }
     
     function renderGallery() {
-        // ... (This function is unchanged)
         elements.gallery.innerHTML = '';
         state.files.forEach(file => {
             const tpl = $('thumbTpl').content.cloneNode(true);
             tpl.querySelector('img').src = file.previewDataUrl;
             tpl.querySelector('[data-action="remove"]').onclick = () => {
                 state.files = state.files.filter(f => f.id !== file.id);
-                $(`metadata-row-${file.id}`)?.remove(); $(`prompt-card-${file.id}`)?.remove(); $(`bg-card-${file.id}`)?.remove();
+                $(`metadata-row-${file.id}`)?.remove();
                 renderGallery();
             };
             elements.gallery.appendChild(tpl);
         });
     }
 
-    // --- START: NEW AND IMPROVED CODE ---
-
-    const GEMINI_RPM = 15; // Official Gemini Free Tier Rate Limit
-    const CONCURRENT_LIMIT = 4; // Number of tasks to run at the same time
-
-    /**
-     * Processes a queue of tasks concurrently using a worker pool pattern.
-     * @param {Array<Object>} tasks - The array of items to process.
-     * @param {Function} processorFn - The async function that processes a single task.
-     * @param {number} concurrency - The number of workers to run in parallel.
-     * @param {Function} onProgress - Callback function to report progress.
-     */
-    async function processConcurrently(tasks, processorFn, concurrency, onProgress) {
-        const queue = [...tasks];
-        let processedCount = 0;
-        
-        const runWorker = async () => {
-            while (queue.length > 0) {
-                const task = queue.shift();
-                if (task) {
-                    let retries = 3;
-                    let success = false;
-                    while(retries > 0 && !success) {
-                        try {
-                            await processorFn(task);
-                            success = true;
-                        } catch (error) {
-                            console.error(`Attempt failed for ${task.fileName}:`, error.message);
-                            retries--;
-                            if (error.message.includes('Rate limit') && retries > 0) {
-                                const backoffTime = Math.pow(2, 3 - retries) * 2000 + Math.random() * 1000;
-                                await sleep(backoffTime);
-                            } else if (retries > 0) {
-                                await sleep(3000); // Wait on other errors too
-                            } else {
-                                console.error(`Task ${task.fileName} failed permanently.`);
-                            }
-                        }
-                    }
-                    processedCount++;
-                    onProgress(processedCount, tasks.length);
-                }
-            }
-        };
-
-        const workers = Array(concurrency).fill(null).map(() => runWorker());
-        await Promise.all(workers);
-    }
-
-    async function handleJob(button, originalText, tasks, processorFn, isGemini = true) {
-        const totalTasks = tasks.length;
+    async function processSequentiallyWithThrottle(tasks, processorFn, button, originalText) {
         button.disabled = true;
-
-        const onProgress = (processed, total) => {
-            button.textContent = `Processing ${processed}/${total}...`;
-        };
-        
-        await processConcurrently(tasks, processorFn, CONCURRENT_LIMIT, onProgress);
-
+        let processedCount = 0;
+        for (const task of tasks) {
+            processedCount++;
+            button.textContent = `Processing ${processedCount}/${tasks.length}...`;
+            try {
+                await processorFn(task, 2);
+            } catch (error) {
+                console.error(`Task ${task.fileName} failed permanently:`, error);
+            }
+            await sleep(2100); // Safe delay for ~30 RPM
+        }
         button.disabled = false;
         button.textContent = originalText;
     }
-
-    function getMetadataSystemInstruction() { return `You are an expert stock media metadata creator... Respond ONLY with a valid JSON object: {"title": "...", "keywords": "...", "category": ...}`; }
-    async function generateMetadataForImage(image) {
+    
+    async function generateMetadataForImage(image, retries) {
         let row = $(`metadata-row-${image.id}`);
         if (!row) {
             const tpl = $('metadataRowTpl').content.cloneNode(true);
@@ -215,162 +140,92 @@
             row.querySelector('img').src = image.previewDataUrl; row.querySelector('span').textContent = image.fileName;
             elements.metadataTable.appendChild(row);
         }
-        const cells = row.querySelectorAll('td'); 
-        cells[1].textContent = 'Processing...';
+        const cells = row.querySelectorAll('td'); cells[1].textContent = 'Processing...';
 
         try {
-            const apiKey = getNextApiKey();
-            if (!apiKey) throw new Error("No Gemini API key.");
-            const body = { contents: [{ parts: [{ text: getMetadataSystemInstruction() }, { inlineData: { mimeType: 'image/jpeg', data: image.analysisBase64 } }] }] };
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, { method: 'POST', body: JSON.stringify(body) });
-            
-            if (!res.ok) {
-                if (res.status === 429) throw new Error('Rate limit exceeded');
-                throw new Error(`API Error (${res.status})`);
+            const provider = elements.provider.value;
+            let finalMetadata;
+
+            if (provider === 'gemini') {
+                const system_prompt = `You are an expert stock media metadata creator... Respond ONLY with a valid JSON: {"title": "...", "keywords": "...", "category": ...}`;
+                const res = await fetch('/api/generate', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ provider: 'gemini', system_prompt, base64: image.analysisBase64, file_mime: image.mime })
+                });
+                if (!res.ok) throw new Error((await res.json()).error);
+                const data = await res.json();
+                const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text.replace(/```json|```/g, '').trim();
+                finalMetadata = JSON.parse(textResponse);
+            } else if (provider === 'groq') {
+                // Step 1: Get description from Gemini
+                cells[1].textContent = 'Analyzing vision...';
+                const vision_prompt = "Objectively describe this image in detail. Focus on the main subject, setting, and any actions.";
+                const visionRes = await fetch('/api/generate', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ provider: 'gemini', system_prompt: vision_prompt, base64: image.analysisBase64, file_mime: image.mime })
+                });
+                if (!visionRes.ok) throw new Error(`Vision Error: ${(await visionRes.json()).error}`);
+                const visionData = await visionRes.json();
+                const description = visionData.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                // Step 2: Get metadata from Groq using the description
+                cells[1].textContent = 'Generating with Groq...';
+                const groq_prompt = `Based on this description: "${description}", act as a stock media expert. Generate: 1. A Title: ${elements.titleLength.value} to 20 words. 2. Keywords: Exactly ${elements.keywordCount.value} comma-separated words. 3. A Category Number from this list: ${ADOBE_CATEGORIES}. Respond ONLY with a valid JSON.`;
+                const groqRes = await fetch('/api/generate', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ provider: 'groq', system_prompt: groq_prompt, base64: "No image, use system prompt." })
+                });
+                if (!groqRes.ok) throw new Error(`Groq Error: ${(await groqRes.json()).error}`);
+                const groqData = await groqRes.json();
+                const textResponse = groqData.choices[0]?.message?.content.replace(/```json|```/g, '').trim();
+                finalMetadata = JSON.parse(textResponse);
             }
-            
-            const data = await res.json();
-            const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text.replace(/```json|```/g, '').trim();
-            if (!textResponse) throw new Error("Empty API response");
-            
-            const metadata = JSON.parse(textResponse);
-            image.metadata = metadata;
-            cells[1].textContent = metadata.title; cells[2].textContent = metadata.keywords; cells[3].textContent = metadata.category;
+
+            image.metadata = finalMetadata;
+            cells[1].textContent = finalMetadata.title;
+            cells[2].textContent = finalMetadata.keywords;
+            cells[3].textContent = finalMetadata.category;
+
         } catch (err) {
-            cells[1].textContent = `Error: ${err.message}. Retrying...`;
-            throw err; // Re-throw to trigger the retry logic in the worker
+            if (retries > 0) {
+                cells[1].textContent = `Retrying... (${err.message})`;
+                await sleep(3000 + Math.random() * 2000);
+                return generateMetadataForImage(image, retries - 1);
+            } else {
+                cells[1].textContent = `Error: ${err.message}`;
+                throw err;
+            }
         }
     }
+    
     elements.generateMetadataBtn.onclick = async () => {
-        if (!state.files.length || !state.geminiKeys.length) return alert('Add files and at least one Gemini API key.');
+        if (!state.files.length) return alert('Add files first.');
+        if (!localStorage.getItem('imgToolkit.settings')) return alert('Please set your API keys in Settings.');
         elements.metadataPlaceholder.classList.add('hidden');
-        await handleJob(elements.generateMetadataBtn, "Generate Metadata", state.files, generateMetadataForImage);
+        await processSequentiallyWithThrottle(state.files, generateMetadataForImage, elements.generateMetadataBtn, "Generate Metadata");
         if (state.files.some(f => f.metadata)) elements.downloadCsvBtn.classList.remove('hidden');
     };
-    
-    function getPromptSystemInstruction() { return `You are an expert AI art prompt engineer... Deconstruct the image into its core components and format the output as a clean, comma-separated list of keywords and phrases...`; }
-    async function generatePromptForImage(image) {
-        let cardEl = $(`prompt-card-${image.id}`);
-        if (!cardEl) {
-            const tpl = $('promptCardTpl').content.cloneNode(true);
-            cardEl = tpl.querySelector('div'); cardEl.id = `prompt-card-${image.id}`;
-            tpl.querySelector('img').src = image.previewDataUrl;
-            elements.promptResultsContainer.prepend(cardEl);
-        }
-        const textarea = cardEl.querySelector('textarea'); 
-        textarea.value = 'Processing...';
-        try {
-            const apiKey = getNextApiKey();
-            if (!apiKey) throw new Error("No Gemini API key.");
-            const body = { contents: [{ parts: [{ text: getPromptSystemInstruction() }, { inlineData: { mimeType: 'image/jpeg', data: image.analysisBase64 } }] }] };
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, { method: 'POST', body: JSON.stringify(body) });
-            
-            if (!res.ok) {
-                if (res.status === 429) throw new Error('Rate limit exceeded');
-                throw new Error(`API Error (${res.status})`);
-            }
 
-            const data = await res.json();
-            const promptText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (!promptText) throw new Error("Empty API response");
-            image.prompt = promptText; 
-            textarea.value = promptText;
-        } catch (err) {
-            textarea.value = `Error: ${err.message}. Retrying...`; 
-            throw err;
-        }
-    }
-    elements.generatePromptsBtn.onclick = async () => {
-        if (!state.files.length || !state.geminiKeys.length) return alert('Add files and at least one Gemini API key.');
-        elements.promptPlaceholder.classList.add('hidden');
-        await handleJob(elements.generatePromptsBtn, "Generate All", state.files, generatePromptForImage);
-    };
-
-    async function removeBgForImage(image) {
-        let cardEl = $(`bg-card-${image.id}`);
-        if (!cardEl) {
-            const tpl = $('bgCardTpl').content.cloneNode(true);
-            cardEl = tpl.querySelector('div'); cardEl.id = `bg-card-${image.id}`;
-            tpl.querySelector('[data-type="original"]').src = image.previewDataUrl;
-            elements.bgResultsContainer.prepend(cardEl);
-        }
-        const loaderEl = cardEl.querySelector('[data-type="loader"]'); 
-        const loaderText = loaderEl.querySelector('p');
-        loaderEl.classList.remove('hidden');
-        loaderText.textContent = 'Processing...';
-
-        try {
-            const formData = new FormData(); formData.append('image_file', image.file);
-            const res = await fetch("https://clipdrop-api.co/remove-background/v1", { method: "POST", headers: { "x-api-key": state.clipdropKey }, body: formData });
-            
-            if (!res.ok) {
-                 if (res.status === 429) throw new Error('Rate limit exceeded');
-                throw new Error(`API Error (${res.status})`);
-            }
-
-            const blob = await res.blob();
-            image.processedBlob = blob;
-            cardEl.querySelector('[data-type="processed"]').src = URL.createObjectURL(blob);
-            const downloadBtn = cardEl.querySelector('[data-action="download"]');
-            downloadBtn.classList.remove('hidden');
-            downloadBtn.onclick = () => saveAs(blob, `${image.fileName.split('.')[0]}_processed.png`);
-            loaderEl.classList.add('hidden');
-        } catch (err) {
-            loaderText.textContent = `Error: ${err.message}. Retrying...`;
-            throw err;
-        }
-    }
-    elements.removeBgBtn.onclick = async () => {
-        if (!state.files.length || !state.clipdropKey) return alert('Add files and a Clipdrop API key.');
-        elements.bgPlaceholder.classList.add('hidden');
-        await handleJob(elements.removeBgBtn, "Remove All Backgrounds", state.files, removeBgForImage, false);
-        if (state.files.some(f => f.processedBlob)) elements.downloadZipBtn.classList.remove('hidden');
-    };
-    // --- END: NEW AND IMPROVED CODE ---
-
-    function switchTab(tabName) {
-        // ... (This function is unchanged)
-        state.activeTab = tabName;
-        ['metadata', 'prompts', 'backgrounds'].forEach(name => {
-            $(`${name}Panel`).classList.toggle('hidden', name !== tabName);
-            elements.tabs.querySelector(`[data-tab="${name}"]`).classList.toggle('active', name === tabName);
-        });
-    }
-    function addApiKeyInput(key = '') {
-        // ... (This function is unchanged)
-        const tpl = $('apiKeyInputTpl').content.cloneNode(true);
-        tpl.querySelector('input').value = key;
-        tpl.querySelector('[data-action="remove-key"]').onclick = (e) => e.target.closest('.flex').remove();
-        elements.geminiKeyList.appendChild(tpl);
-    }
     function loadSettings() {
-        // ... (This function is unchanged)
-        const raw = localStorage.getItem('imgToolkit.settings'); if (!raw) { addApiKeyInput(); return; }
+        const raw = localStorage.getItem('imgToolkit.settings'); if (!raw) return;
         try {
             const data = JSON.parse(raw);
-            state.geminiKeys = data.geminiKeys || []; state.clipdropKey = data.clipdropKey || '';
-            elements.geminiKeyList.innerHTML = '';
-            if (state.geminiKeys.length > 0) { state.geminiKeys.forEach(key => addApiKeyInput(key)); } else { addApiKeyInput(); }
-            elements.clipdropKey.value = state.clipdropKey;
-        } catch { addApiKeyInput(); }
+            elements.geminiKey.value = data.geminiKey || '';
+            elements.groqKey.value = data.groqKey || '';
+        } catch {}
     }
     
-    // ... (All event listeners below this line are unchanged)
-    elements.addKeyBtn.onclick = () => addApiKeyInput();
     elements.saveSettings.onclick = () => {
-        state.geminiKeys = [...elements.geminiKeyList.querySelectorAll('input')].map(i => i.value.trim()).filter(Boolean);
-        state.clipdropKey = elements.clipdropKey.value.trim();
-        localStorage.setItem('imgToolkit.settings', JSON.stringify({ geminiKeys: state.geminiKeys, clipdropKey: state.clipdropKey }));
+        const settings = {
+            geminiKey: elements.geminiKey.value.trim(),
+            groqKey: elements.groqKey.value.trim()
+        };
+        localStorage.setItem('imgToolkit.settings', JSON.stringify(settings));
         elements.settingsDlg.close();
     };
+    
     elements.settingsBtn.onclick = () => elements.settingsDlg.showModal();
-    elements.clearAllBtn.onclick = () => {
-        state.files = []; renderGallery();
-        elements.metadataTable.innerHTML = ''; elements.promptResultsContainer.innerHTML = ''; elements.bgResultsContainer.innerHTML = '';
-        elements.metadataPlaceholder.classList.remove('hidden'); elements.promptPlaceholder.classList.remove('hidden'); elements.bgPlaceholder.classList.remove('hidden');
-        elements.downloadCsvBtn.classList.add('hidden'); elements.downloadZipBtn.classList.add('hidden');
-    };
-    elements.tabs.onclick = e => { if (e.target.matches('button')) switchTab(e.target.dataset.tab); };
+    elements.clearAllBtn.onclick = () => { /* ... clear logic ... */ };
     ;['dragenter','dragover'].forEach(evName => elements.dropzone.addEventListener(evName, e => { e.preventDefault(); e.currentTarget.classList.add('dragover'); }));
     ;['dragleave','drop'].forEach(evName => elements.dropzone.addEventListener(evName, e => { e.preventDefault(); e.currentTarget.classList.remove('dragover'); }));
     elements.dropzone.onclick = () => elements.fileInput.click();
@@ -380,7 +235,6 @@
     elements.keywordCount.oninput = () => elements.keywordCountLabel.textContent = elements.keywordCount.value;
 
     loadSettings();
-    switchTab('metadata');
   </script>
 </body>
 </html>
